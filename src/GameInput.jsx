@@ -1,18 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function GameInput() {
-  const [gameInput, setGameInput] = useState("");
-
-  const onChange = (event) => {
-    setGameInput(event.target.value);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    setGameInput("");
-  };
-
+function GameInput({ chosenColumn, onSubmit, onChange }) {
   return (
     <form
       action="#"
@@ -24,7 +12,7 @@ function GameInput() {
         type="text"
         name="game-input"
         id="game-input"
-        value={gameInput}
+        value={chosenColumn}
         onChange={onChange}
         className="bg-slate-600 rounded-xl border"
       />

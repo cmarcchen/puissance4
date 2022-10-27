@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-function GameNextPlayer() {
-  const [nextPlayer, setNextPlayer] = useState("Y");
-  return <div className="">The Next Player is {nextPlayer}</div>;
+function GameNextPlayer({ nextPlayer, winner }) {
+  if (winner) {
+    return <div className="">The Winner is {winner}</div>;
+  } else {
+    return <div className="">The Next Player is {nextPlayer}</div>;
+  }
 }
 
 export default GameNextPlayer;
