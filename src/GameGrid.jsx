@@ -2,40 +2,32 @@ import React from "react";
 
 function GameGrid({ gameState, onClick }) {
   return (
-    <div
-      className="container grid grid-cols-6 m-8 w-80 -rotate-90"
-      onClick={onClick}
-    >
-      {gameState.map((column, columnIndex) => {
-        return column.map((value, rowIndex) => {
-          if (value === "") {
-            return (
-              <div
-                className="placeholder border border-blue-600  w-8 h-8"
-                key={`${columnIndex}:${rowIndex}`}
-              ></div>
-            );
-          }
-          if (value === "Y") {
-            return (
-              <div
-                className="placeholder border border-blue-600  w-8 h-8 bg-yellow-400"
-                key={`${columnIndex}:${rowIndex}`}
-              ></div>
-            );
-          }
-
-          if (value === "R") {
-            return (
-              <div
-                className="placeholder border border-blue-600  w-8 h-8 bg-red-700"
-                key={`${columnIndex}:${rowIndex}`}
-              ></div>
-            );
-          }
-          return <div className=""></div>;
-        });
-      })}
+    <div className="flex justify-center ">
+      <div className=" grid grid-cols-7 m-8 w-[448px] border-2 border-blue-600  -rotate-180 shadow-lg">
+        {gameState.map((column, columnIndex) => {
+          return (
+            <div
+              className={`flex flex-col hover:bg-slate-300 hover:cursor-pointer`}
+              key={`col-${columnIndex}`}
+              id={`col-${columnIndex}`}
+              onClick={onClick}
+            >
+              {column.map((value, rowIndex) => {
+                let backgroundColor = "";
+                if (value === "") backgroundColor = "";
+                if (value === "Y") backgroundColor = "bg-yellow-400";
+                if (value === "R") backgroundColor = "bg-red-700";
+                return (
+                  <div
+                    className={`placeholder border-2 border-blue-600 w-16 h-16 ${backgroundColor}`}
+                    key={`${columnIndex}:${rowIndex}`}
+                  ></div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

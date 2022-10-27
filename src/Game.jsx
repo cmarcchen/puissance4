@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import GameGrid from "./GameGrid";
-import GameInput from "./GameInput";
+
 import GameNextPlayer from "./GameNextPlayer";
-import { addToken, getWinner, isFull } from "./class/GameGridStructure";
+import { addToken, getWinner, isFull } from "./utils/GameGridStructure";
 
 function Game() {
   const initialGrid = [
@@ -13,10 +13,9 @@ function Game() {
     ["", "", "", "", "", ""],
     ["", "", "", "", "", ""],
     ["", "", "", "", "", ""],
-    ["", "", "", "", "", ""],
   ];
   const [nextPlayer, setNextPlayer] = useState("Y");
-  const [chosenColumn, setChosenColumn] = useState(0);
+
   const [gameState, setGameState] = useState(initialGrid);
   const [winner, setWinner] = useState("");
 
@@ -24,35 +23,29 @@ function Game() {
     setWinner(getWinner(gameState));
   }, [gameState]);
 
-  const onClick = () => {
-    // setGameState(addToken(gameState, "Y", 0));
+  const onClick = (event) => {
+    const numColumn = event.target.parentElement.id;
+    const inputColumn = parseInt(numColumn.match(/col-(\d)/)[1]);
+
+    if (isFull(gameState, inputColumn)) return;
+    if (winner) return;
+
+    setGameState(addToken(gameState, nextPlayer, inputColumn));
+    setNextPlayer(nextPlayer === "Y" ? "R" : "Y");
   };
 
-  const onChange = (event) => {
-    setChosenColumn(event.target.value);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    if (isFull(gameState, chosenColumn)) return;
-
-    if (!winner) {
-      setGameState(addToken(gameState, nextPlayer, chosenColumn));
-      setChosenColumn(0);
-      setNextPlayer(nextPlayer === "Y" ? "R" : "Y");
-    }
+  const restart = () => {
+    setGameState(initialGrid);
   };
 
   return (
     <>
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center m-24">
         <GameGrid gameState={gameState} onClick={onClick} />
-        <GameNextPlayer nextPlayer={nextPlayer} winner={winner} />
-        <GameInput
-          chosenColumn={chosenColumn}
-          onSubmit={onSubmit}
-          onChange={onChange}
+        <GameNextPlayer
+          nextPlayer={nextPlayer}
+          winner={winner}
+          restart={restart}
         />
       </div>
     </>
