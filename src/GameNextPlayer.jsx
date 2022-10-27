@@ -3,7 +3,7 @@ import React from "react";
 function GameNextPlayer({ nextPlayer, winner, restart }) {
   if (winner) {
     return (
-      <div className="">
+      <div className="flex items-center gap-4">
         <h1>The Winner is {winner}</h1>
         <button
           onClick={restart}

@@ -15,7 +15,6 @@ function Game() {
     ["", "", "", "", "", ""],
   ];
   const [nextPlayer, setNextPlayer] = useState("Y");
-
   const [gameState, setGameState] = useState(initialGrid);
   const [winner, setWinner] = useState("");
 
@@ -40,7 +39,7 @@ function Game() {
 
   return (
     <>
-      <div className="flex flex-col justify-center m-24">
+      <div className="flex flex-col justify-center items-center bg-slate-100 w-4/6 mt-16 m-auto rounded-lg p-6 shadow-xl">
         <GameGrid gameState={gameState} onClick={onClick} />
         <GameNextPlayer
           nextPlayer={nextPlayer}

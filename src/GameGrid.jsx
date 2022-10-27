@@ -2,7 +2,7 @@ import React from "react";
 
 function GameGrid({ gameState, onClick }) {
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center m-16 ">
       <div className=" grid grid-cols-7 m-8 w-[448px] border-2 border-blue-600  -rotate-180 shadow-lg">
         {gameState.map((column, columnIndex) => {
           return (
