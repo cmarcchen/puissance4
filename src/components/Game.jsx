@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GameGrid from "./GameGrid";
 
 import GameNextPlayer from "./GameNextPlayer";
-import { addToken, getWinner, isFull } from "./utils/GameGridStructure";
+import { addToken, getWinner, isFull } from "../utils/GameGridStructure";
 
 function Game() {
   const initialGrid = [
