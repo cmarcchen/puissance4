@@ -36,9 +36,11 @@ describe("run a 2 players game", () => {
     cy.get("#col-5 > :nth-child(6)").click();
     cy.get("#col-2 > :nth-child(6)").click();
 
+    cy.contains("The Winner is Y").should("exist");
     cy.contains("Restart").should("exist");
     cy.get(".p-2").click();
     cy.contains("Red").should("exist");
     cy.contains("Yellow").should("exist");
+    cy.contains("The Winner is Y").should("not.exist");
   });
 });
